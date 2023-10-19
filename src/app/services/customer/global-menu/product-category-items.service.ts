@@ -2,23 +2,49 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class CatelogService {
+export class ProductCategoryItemsService {
 
-  private url:string="http://localhost:4200/api/v1/product/all"
+    
+  private url:String="http://localhost:4200/api/v1/product/"
+  //"http://194.163.40.229:8088/api/v1/product/image/biryani/costal/"+this.productName
+  
  
    constructor(private http:HttpClient) { }    
                          
       
   
-   getProductALl() 
+   getProductAll( shopName:String,
+                  category:String
+                ) 
        {
+         let path:string=""+this.url+category+"/"+shopName as string;
+         console.log(path)
              return this.http
-                         .get(this.url)
+                         .get(encodeURI(path))
                          .pipe( catchError(this.handleError) );
        }
+
+       getCategories() 
+       {
+
+            let path:string=""+this.url+"/all"
+             return this.http
+                         .get(encodeURI(encodeURI(path)))
+                         .pipe( catchError(this.handleError) );
+       }
+
+       getImage( shopName:String,
+                 category:String
+              )
+       {
+         let path:string=""+this.url+"image/"+category+"/"+shopName+"/"
+         return path
+       }
+    
         
 
 

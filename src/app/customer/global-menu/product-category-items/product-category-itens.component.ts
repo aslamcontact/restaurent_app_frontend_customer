@@ -39,11 +39,13 @@ export class ProductCategoryItensComponent {
              .subscribe(this.categorriesApiReq)
               
              
+          
              
       }
                    
       getProducts(category:String)
       {
+        console.log("--------------------"+category+"------------")
         this.allProducts=[]
         this.productApiService
         .getProductAll(this.shopName,category)
@@ -80,10 +82,8 @@ export class ProductCategoryItensComponent {
                                                               url)
                                          ))
                                           
-               
-              if(this.allProducts.length>0)
-                    this.getProducts(this.allProducts[0].getProductName())
-              
+                      
+                                        
                                 
        
 }
@@ -111,7 +111,7 @@ export class ProductCategoryItensComponent {
        
       response.forEach( (product:any)=>
                          {
-                          this.shopName=product.brand
+                           
                           let  url=this.productApiService.getImage(this.shopName,product.name)
                           this.categories
                                .push(new ProductCategoriesParser( product.name,
@@ -123,6 +123,10 @@ export class ProductCategoryItensComponent {
                                                                 
                          }
                       )
+
+                      if(this.categories.length>0)
+                      this.getProducts(this.categories[0].getCategory())
+
 
      }
                         

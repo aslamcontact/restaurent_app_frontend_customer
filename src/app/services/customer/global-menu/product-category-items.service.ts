@@ -23,6 +23,7 @@ export class ProductCategoryItemsService {
        {
          let path:string=""+this.url+category+"/"+shopName as string;
          console.log(path)
+         console.log(path)
              return this.http
                          .get(encodeURI(path))
                          .pipe( catchError(this.handleError) );

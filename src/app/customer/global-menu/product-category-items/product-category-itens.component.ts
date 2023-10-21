@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { ProductCategoryItemsService } from 'src/app/services/customer/global-menu/product-category-items.service';
 import { ProductCategoriesParser,ProductsParser } from 'src/app/services/customer/global-menu/catelog-api-parser';
 @Component({
@@ -8,10 +8,10 @@ import { ProductCategoriesParser,ProductsParser } from 'src/app/services/custome
 })
 export class ProductCategoryItensComponent {
 
-  shopName=''
+  @Input() shopName:String="";
   private imageUrl=''
   
-  isProductApiComplete:boolean=false;
+  isProductApiComplete:boolean=true;
   isCategoryApiComplete:boolean=false;
   categories:ProductCategoriesParser[]=[]
   errorMessage:String=''
@@ -32,12 +32,13 @@ export class ProductCategoryItensComponent {
                                          
 
   ngOnInit()
-      {                                                                                                                                         
+      {       
+        this.shopName="aslamres"                                                                                                                                  
              this.productApiService
-             .getCategories()
+             .getCategories(this.shopName)
              .subscribe(this.categorriesApiReq)
-              this.shopName="costal"
-             this.getProducts("biryani")
+              
+             
              
       }
                    
@@ -78,6 +79,11 @@ export class ProductCategoryItensComponent {
                                                               product.quantity,
                                                               url)
                                          ))
+                                          
+               
+              if(this.allProducts.length>0)
+                    this.getProducts(this.allProducts[0].getProductName())
+              
                                 
        
 }

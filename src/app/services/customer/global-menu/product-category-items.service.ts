@@ -28,10 +28,10 @@ export class ProductCategoryItemsService {
                          .pipe( catchError(this.handleError) );
        }
 
-       getCategories() 
+       getCategories(shopName:String) 
        {
 
-            let path:string=""+this.url+"/all"
+            let path:string=""+this.url+"filter/"+shopName as string
              return this.http
                          .get(encodeURI(encodeURI(path)))
                          .pipe( catchError(this.handleError) );
